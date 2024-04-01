@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Web3 from "web3";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Button from "./Button";
 
 const ConnectToMetaMask = () => {
   const [web3, setWeb3] = useState(null);
@@ -41,17 +42,18 @@ const ConnectToMetaMask = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <ToastContainer />
-
       {!isConnected ? (
-        <button onClick={connectToMetaMask}>Connect to MetaMask</button>
+        <div className="relative">
+          <Button handleClick={connectToMetaMask} label="Connect to MetaMask" />
+        </div>
       ) : (
-        <>
-          <p>Connected account: {account}</p>
-          <p>Balance: {balance} ETH</p>
-          <button onClick={disconnectWallet}>Disconnect</button>
-        </>
+        <div className="gap-4 flex flex-col">
+          <p className="font-bold text-xl">Connected account: {account}</p>
+          <p className="font-bold text-xl">Balance: {balance} ETH</p>
+          <Button handleClick={disconnectWallet} label="Disconnect" />
+        </div>
       )}
     </div>
   );
